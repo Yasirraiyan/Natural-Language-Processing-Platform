@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-time Notifications</title>
+    <style>
+        body {
+            background-color: #ffefd5;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #ff69b4;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #ff1493;
+        }
+
+        .notifications {
+            margin-top: 20px;
+        }
+
+        .notification {
+            background-color: #ff69b4;
+            color: white;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            animation: fadein 0.5s;
+        }
+
+        @keyframes fadein {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeout {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Real-time Notifications</h2>
+        <button class="btn" onclick="sendNotification()">Send Notification</button>
+        <div id="notifications" class="notifications"></div>
+    </div>
+    <script>
+        function sendNotification() {
+            const notifications = document.getElementById('notifications');
+
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = `New notification at ${new Date().toLocaleTimeString()}`;
+
+            notifications.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'fadeout 0.5s';
+                setTimeout(() => {
+                    notification.remove();
+                }, 500);
+            }, 3000);
+        }
+    </script>
+</body>
+
+</html>
