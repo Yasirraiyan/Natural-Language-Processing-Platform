@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background-color: #ff1493;
+        }
+
+        .error {
+            color: red;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Welcome to Login Page</h1>
+        <div class="error" id="error-message"></div>
+        <label>Username</label>
+        <input type="text" id="username" placeholder="Enter your username" />
+        <br><br>
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Enter your password" />
+        <br><br>
+        <button class="btn" onclick="validateForm()">Login</button>
+    </div>
+
+    <script>
+        function validateForm() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
+
+            if (username === '' || password === '') {
+                errorMessage.textContent = 'Both fields are required!';
+                return;
+            }
+
+            // Example: Username validation (minimum 4 characters)
+            if (username.length < 4) {
+                errorMessage.textContent = 'Username must be at least 4 characters long!';
+                return;
+            }
+
+            // Example: Password validation (minimum 8 characters)
+            if (password.length < 8) {
+                errorMessage.textContent = 'Password must be at least 8 characters long!';
+                return;
+            }
+
+            errorMessage.textContent = 'Login successful!';
+            errorMessage.style.color = 'green';
+            // Here you can add code to handle the login process
+        }
+    </script>
+</body>
+
+</html>
