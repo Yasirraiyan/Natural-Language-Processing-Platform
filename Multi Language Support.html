@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-language Support</title>
+    <style>
+        body {
+            background-color: #f7f7f7;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #ff69b4;
+            margin-bottom: 20px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .content {
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 id="title">Multi-language Support</h2>
+        <select id="languageSelect" onchange="changeLanguage()">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+        </select>
+        <div class="content">
+            <p id="welcomeMessage">Welcome to our application!</p>
+            <p id="description">Please select your preferred language from the dropdown above.</p>
+        </div>
+    </div>
+    <script>
+        const translations = {
+            en: {
+                title: "Multi-language Support",
+                welcomeMessage: "Welcome to our application!",
+                description: "Please select your preferred language from the dropdown above."
+            },
+            es: {
+                title: "Soporte Multilingüe",
+                welcomeMessage: "¡Bienvenido a nuestra aplicación!",
+                description: "Por favor, selecciona tu idioma preferido en el menú desplegable de arriba."
+            }
+        };
+
+        function changeLanguage() {
+            const selectedLanguage = document.getElementById('languageSelect').value;
+            document.getElementById('title').textContent = translations[selectedLanguage].title;
+            document.getElementById('welcomeMessage').textContent = translations[selectedLanguage].welcomeMessage;
+            document.getElementById('description').textContent = translations[selectedLanguage].description;
+        }
+    </script>
+</body>
+
+</html>
