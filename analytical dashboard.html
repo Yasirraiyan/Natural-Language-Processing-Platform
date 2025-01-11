@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Dashboard</title>
+    <style>
+        body {
+            background-color: #f7f7f7;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 80%;
+            text-align: center;
+        }
+
+        h2 {
+            color: #ff69b4;
+            margin-bottom: 20px;
+        }
+
+        .metric {
+            margin: 10px 0;
+            padding: 20px;
+            background-color: #f1f1f1;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .metric .label {
+            font-weight: bold;
+        }
+
+        .chart {
+            margin-top: 20px;
+            width: 100%;
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Analytics Dashboard</h2>
+        <div class="metric">
+            <span class="label">Total Users:</span>
+            <span id="totalUsers">0</span>
+        </div>
+        <div class="metric">
+            <span class="label">Active Users:</span>
+            <span id="activeUsers">0</span>
+        </div>
+        <div class="metric">
+            <span class="label">Engagement Rate:</span>
+            <span id="engagementRate">0%</span>
+        </div>
+        <canvas id="engagementChart" class="chart"></canvas>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Simulated data
+            const metrics = {
+                totalUsers: 1200,
+                activeUsers: 300,
+                engagementRate: (300 / 1200 * 100).toFixed(2),
+                engagementData: [30, 40, 50, 60, 70, 80, 90, 100]
+            };
+
+            // Update metrics
+            document.getElementById('totalUsers').textContent = metrics.totalUsers;
+            document.getElementById('activeUsers').textContent = metrics.activeUsers;
+            document.getElementById('engagementRate').textContent = metrics.engagementRate + '%';
+
+            // Create chart
+            const ctx = document.getElementById('engagementChart').getContext('2d');
+            const engagementChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8'],
+                    datasets: [{
+                        label: 'User Engagement',
+                        data: metrics.engagementData,
+                        backgroundColor: 'rgba(255, 105, 180, 0.2)',
+                        borderColor: 'rgba(255, 105, 180, 1)',
+                        borderWidth: 1,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
