@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Role-based Access Control</title>
+    <style>
+        body {
+            background-color: #ffefd5;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #ff69b4;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #ff1493;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .message {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Role-based Access Control</h2>
+        <div id="message" class="message"></div>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="role">Role</label>
+        <select id="role" name="role" required>
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+        </select>
+
+        <button class="btn" onclick="login()">Login</button>
+
+        <div id="admin-section" class="hidden">
+            <h3>Admin Section</h3>
+            <p>Welcome, admin! You have full access to this section.</p>
+        </div>
+
+        <div id="user-section" class="hidden">
+            <h3>User Section</h3>
+            <p>Welcome, user! You have limited access to this section.</p>
+        </div>
+    </div>
+    <script>
+        function login() {
+            const username = document.getElementById('username').value;
+            const role = document.getElementById('role').value;
+            const message = document.getElementById('message');
+            const adminSection = document.getElementById('admin-section');
+            const userSection = document.getElementById('user-section');
+
+            if (username === '') {
+                message.textContent = 'Username is required!';
+                message.style.color = 'red';
+                return;
+            }
+
+            message.textContent = `Welcome, ${username}!`;
+            message.style.color = 'green';
+
+            if (role === 'admin') {
+                adminSection.classList.remove('hidden');
+                userSection.classList.add('hidden');
+            } else {
+                userSection.classList.remove('hidden');
+                adminSection.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+
+</html>
