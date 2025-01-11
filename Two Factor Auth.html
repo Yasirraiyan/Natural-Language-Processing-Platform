@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two-Factor Authentication (2FA)</title>
+    <style>
+        body {
+            background-color: #f7f7f7;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #ff69b4;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #ff1493;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .message {
+            color: red;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="loginContainer">
+        <h2>Login</h2>
+        <div class="message" id="loginMessage"></div>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button class="btn" onclick="login()">Login</button>
+    </div>
+
+    <div class="container hidden" id="2faContainer">
+        <h2>Two-Factor Authentication</h2>
+        <div class="message" id="2faMessage"></div>
+        <input type="text" id="2faCode" placeholder="Enter 2FA Code" required>
+        <button class="btn" onclick="verify2FA()">Verify</button>
+    </div>
+
+    <script>
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const loginMessage = document.getElementById('loginMessage');
+
+            if (username === '' || password === '') {
+                loginMessage.textContent = 'Both fields are required!';
+                return;
+            }
+
+            // Simulate a successful login and generate a 2FA code
+            loginMessage.textContent = '';
+            const generatedCode = '123456'; // This would be generated and sent to the user in a real application
+            sessionStorage.setItem('2faCode', generatedCode);
+            sessionStorage.setItem('authenticated', 'false');
+
+            // Show 2FA container
+            document.getElementById('loginContainer').classList.add('hidden');
+            document.getElementById('2faContainer').classList.remove('hidden');
+        }
+
+        function verify2FA() {
+            const enteredCode = document.getElementById('2faCode').value;
+            const storedCode = sessionStorage.getItem('2faCode');
+            const _2faMessage = document.getElementById('2faMessage');
+
+            if (enteredCode === storedCode) {
+                sessionStorage.setItem('authenticated', 'true');
+                _2faMessage.textContent = 'Authentication successful!';
+                _2faMessage.style.color = 'green';
+            } else {
+                _2faMessage.textContent = 'Invalid 2FA code!';
+            }
+        }
+    </script>
+</body>
+
+</html>
